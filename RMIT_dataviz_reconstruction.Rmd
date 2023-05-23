@@ -1,0 +1,221 @@
+---
+title: "Assignment 2"
+author: "Adam Simmons (Student ID: s4001341)"
+subtitle: "Deconstruct, Reconstruct Web Report"
+output:
+  html_document: default
+  pdf_document: default
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+# Do not change these settings!
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+```
+
+###  {.tabset}
+
+Click the **Original**, **Code** and **Reconstruction** tabs to read about the issues and how they were fixed.
+
+#### Original
+
+<br>
+
+<center><img src="Data Science tasks chart.png" width="50%"/></center>
+
+<center>*Source: Project Pro (2023).*</center>
+
+<br>
+
+**Objective**
+
+The objective of this data visualisation (Project Pro 2023) is to highlight the substantial part that data preparation plays in data science. It is presented on Project Pro's website, though the graphic is credited to DeZyre. Both learning platform's appear connected as www.dezyre.com redirects to www.projectpro.io and they share a common co-founder. The visualisation draws upon data and research originally reported in CrowdFlower's 2016 Data Science Report (which uses a donut chart to present the data, and is not without its own issues).
+
+The graphic is targeted to aspiring data scientists, on a platform offering learning opportunities and resources. The graphic aims to convey the importance of data preparation in the range of tasks a data scientist might be required to undertake. Ultimately the objective is to inspire the reader to engage with Project Pro's offerings to learn the skills of data preparation.
+
+Unfortunately, the visualisation fails to achieve this objective in an effective manner. Instead it demonstrates a lack of consideration of basic visualisation and design principles as well as a lack of attention to detail - highly regarded attributes for an aspiring data scientist.
+
+<br>
+
+<b> Identifying visual issues </b>
+
+This visualisation has many issues which can be reduced to three main issues:
+
+1.  Form - the choice of pie chart that is 3D in nature is not a combination that serves the objective well. To begin, pie charts use angles to divide the sectors which humans have trouble reading accurately. A pie chart might have worked well if comparing the data preparation portion only in contrast to the rest, in line with Ricks (2020) suggestion that a pie chart is best to convey a "general sense of the part-to-whole relationship" and/or that one segment is "relatively large or small". This chart adds in a 3D effect that may look clever but compounds the issue and completely obscures how the graphic should be interpreted. Are the sectors based on the angles that create two-dimensional area or on the heights also (volume)? A closer inspection of the largest segment shows it represents a value of 60%, though it appears to be only slightly more than 50%. Similar inconsistencies with each segment - for example, 04 and 05 are only 1% different, but this is not clear from the chart in a visual sense.
+
+2.  Design - The use of colour is arbitrary in this chart. They differentiate the categories, but beyond that they do not serve the objective of the visualisation. Colour could have been used to pull out the two main segments from the rest, in a functional way. Additionally, the colour palette does not cater for colour blindness, with red and green next to each other despite being a combination to avoid. The typography adds unnecessary noise without adding function. There is no discernible significance to the variations of font size and type on the segment numbers. The thin, uppercase nature of the typography surrounding the chart lacks variety, making it hard to discern the main messaging.
+
+3.  Content - Further to the design issues, the chart's clarity suffers from misleading numbers, extraneous material, and lack of proper proofreading. The numbers on the segments do not appear to correspond to anything such as size, order or values. The annotations have the numerical values of interest, but they are small in font size and accompanied by repetitive text that is unnecessary. The absence of a chart title does not help. An indication of the lack of care in the preparation of this graphic can be seen in the paragraph under the chart where the same sentence is duplicated.
+
+It is an unintentionally ironic example of how important visualisation is in the data science process - even for the simple things.
+
+<br>
+
+<br>
+
+**Reference**
+
+Visualisation and data source:
+
+-   Project Pro (2023). *Why data preparation is an important part of data science?*, Project Pro website, accessed 13 March 2023. <https://www.projectpro.io/article/why-data-preparation-is-an-important-part-of-data-science/242>
+
+-   CrowdFlower (2016) *2016 Data Science Report* accessed 13 March 2023. <https://visit.figure-eight.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf>
+
+Workings:
+
+-   Alboukadel (2019) *GGPlot Title, Subtitle and Caption*, Datanovia website, accessed 29 March 2023. <https://www.datanovia.com/en/blog/ggplot-title-subtitle-and-caption/>
+
+-   ggplot2 (n.d.) *Complete Themes*, ggplot2 website, accessed 28 March 2023. <https://ggplot2.tidyverse.org/reference/ggtheme.html>
+
+-   Holtz Y (n.d.) *The Radar chart and its caveats*, From Data to Viz website, accessed 22 March 2023. <https://www.data-to-viz.com/caveat/spider.html>
+
+-   Holtz Y (2018) *Reorder a variable with ggplot2*, R Graph Gallery website, accessed 28 March 2023. <https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html>
+
+-   Ricks E (2020) *What is a pie chart?*, Storytelling with Data website, accessed 28 March 2023. <https://www.storytellingwithdata.com/blog/2020/5/14/what-is-a-pie-chart>
+
+R Packages
+
+-   Bache S, Wickham H (2022) *magrittr: A Forward-Pipe Operator for R*, R package version 2.0.3. <https://CRAN.R-project.org/package=magrittr>
+
+-   Wickham W (2016) *ggplot2: Elegant Graphics for Data Analysis*, Springer-Verlag New York. <https://ggplot2.tidyverse.org>
+
+-   Wickham H, François R, Henry L, Müller K, Vaughan D (2023) *dplyr: A Grammar of Data Manipulation*, R package version 1.1.0. <https://CRAN.R-project.org/package=dplyr>
+
+-   Yihui X (2023) *knitr: A General-Purpose Package for Dynamic Report Generation in R*. R package version 1.42.
+
+-   Yutani H (2022) *gghighlight: Highlight Lines and Points in 'ggplot2'*, R package version 0.4.0. <https://CRAN.R-project.org/package=gghighlight>
+
+<br>
+
+#### Code
+
+The following code was used to fix the issues identified in the original:
+
+```{r}
+# set up all R packages
+library (knitr)
+library (magrittr)
+library (dplyr)
+library (ggplot2)
+library (gghighlight)
+
+# create dataframe - values obtained from CrowdFlower (2016)
+values <- c(3, 4, 5, 9, 19, 60)
+tasks <- c("Training datasets", "Refining algorithms", "Other tasks", "Data mining", "Data collection", "Organising/cleaning data")
+# convert to dataframe
+data <- data.frame(tasks, values)
+# arrange- this is so tasks will be in order of value, not alphabetical
+data %<>% 
+    arrange(values) %>%  
+    mutate(tasks=factor(tasks, levels=tasks)) 
+
+# set colours
+colour_main <- "dodgerblue4"
+colour_bground <- "white"
+colour_text <-"grey70"
+
+# create plot
+plot <- 
+  data %>% 
+    ggplot(aes(x=tasks, y=values)) +
+    # lines
+    geom_segment (aes (xend=tasks, yend=0)) +
+    # dots
+    geom_point(size=9, 
+               color=colour_main) +
+    # add labels to dots
+    geom_text(aes(label=values),
+              colour=colour_bground) +
+    # highlight two main tasks
+    gghighlight(max(values) > 18,
+                use_direct_label = FALSE,
+                unhighlighted_params = list(colour = colour_main, alpha = 0.4)) +
+    # create coloured rectangle
+    annotate("rect",
+             xmin = 4.7, xmax=5.3, ymin = 31, ymax = 59,
+             colour = colour_main,
+             fill = colour_main,
+             alpha =.2) +
+    # add annotation comment
+    annotate("text", x = 5, y = 45, label = "~80% Data Preparation", size = 4.5) +
+    # make horizontal
+    coord_flip() +
+    # set theme 
+    theme_minimal(base_size = 12) +
+    # refine theme elements
+    theme(
+      plot.title = element_text(size = rel(1.6), face="bold"),
+      plot.title.position = "plot",
+      plot.caption = element_text(colour=colour_text, size = rel(0.6)),
+      panel.grid.major.y = element_blank(),
+      axis.text = element_text(size=12)) +
+    # axis labels
+    xlab("") +
+    ylab("% Time Spent") +
+    # chart text
+    labs(
+      title = "How a Data Scientist spends their time",
+      caption = "Data Source: Crowdflower - 2016 Data Science Report") 
+
+```
+
+**Data Reference**
+
+-   CrowdFlower (2016) *2016 Data Science Report* accessed 13 March 2023. <https://visit.figure-eight.com/rs/416-ZBE-142/images/CrowdFlower_DataScienceReport_2016.pdf>
+
+<br><br>
+
+#### Reconstruction
+
+The following plot fixes the main issues in the original.
+
+<br>
+
+
+
+<h2> <u>**DATA PREPARATION: Crucial to data science process** </u> </h2>
+
+
+
+<br> 
+
+
+
+<h4> Steve Lohr of The New York Times said: 
+
+*"Data scientists, according to interviews and expert estimates, spend 50 percent to 80 percent of their time mired in the mundane labor of collecting and preparing unruly digital data, before it can be explored for useful nuggets."*
+
+<br> 
+
+CrowdFlower conducted a survey of about 80 data scientists to discover:
+
+<br>
+
+```{r fig.align="center", echo = FALSE}
+plot
+
+
+```
+
+<br>
+
+-   In addition, 57% of the respondents consider data cleaning as the most boring and least enjoyable task.
+
+</h4><br>
+
+------------------------------------------------------------------------
+
+<br>
+
+**Rationale for reconstruction**
+
+1.  Form - I wanted a 2D chart type that would improve ease and accuracy of comparison. A bar chart would have been an obvious choice, though as data science enthusiasts are the target audience, I opted for something less common. A lollipop chart has the same function, though with its reduced ink usage - digital or otherwise - combined with its focus on the end point, I felt it would be a more interesting and helpful choice.
+
+2.  Design - As a base, ggplot2's minimal theme was used for its simple elegance. Variations were made to aid this. With only two variables - tasks and time spent - there was no need for more than one colour. Instead, transparency (alpha setting) was used to help highlight the main two preparation tasks. Blue was used for both its function in aiding accessibility for people with colour blindness and for its association with such traits as loyalty, trust and intelligence.
+
+3.  Content - A title was added for clarity of purpose. The data source is cited. Values on the data points are relevant and explicit. Label text is simpler. The annotation with the maun point is placed near the relevant data points and to the right of the chart as a focal point to lead the viewer to the relevant insight.
+
+Overall, this reconstruction may be less immediately eye-catching and colourful than the original, though by ensuring accurate portrayal of the data in this simpler and quieter fashion, the intention has been to allow the data to speak more clearly for itself. 
+
+<br><br>
