@@ -15,6 +15,6 @@ https://rpubs.com/adam_simmons/RMIT_Data_Science_Visualisation_Ass2
 Link to original visualisation:  
 https://www.projectpro.io/article/why-data-preparation-is-an-important-part-of-data-science/242
 
-![Screenshot of original visualisation](images/RMIT-dataviz_screenshot_1.png)
+![Screenshot of original visualisation](images/RMIT-dataviz-screenshot_1.png)
 
-![Screenshot of reconstructed visualisation in R](images/RMIT-dataviz_screenshot_2.png)
+![Screenshot of reconstructed visualisation in R](images/RMIT-dataviz-screenshot_2.png)
